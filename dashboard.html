@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlowSkincare</title>
+    <!-- Link Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #ff9999;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        nav {
+            background-color: #ff9999;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav a {
+            padding: 14px 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            background-color: #ff6666;
+        }
+
+        nav a:hover {
+            background-color: #ff6666;
+        }
+        nav a:visited {
+            color: white; /* Ubah warna menjadi putih setelah diklik */
+        }
+        
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Ganti font untuk judul produk */
+        .container h2 {
+            font-family: 'Cherry Bomb One', cursive; /* Gunakan font Cherry Bomb One */
+            font-size: 2.5em; /* Ukuran font dapat disesuaikan */
+            margin-bottom: 20px;
+        }
+
+        .product-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .product {
+            border: 1px solid #ddd;
+            padding: 20px;
+            background-color: #fff;
+            width: 300px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .product img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .carousel-inner img {
+            max-height: 700px;
+            object-fit: cover;
+        }
+
+        footer {
+            background-color: #ff9999;
+            text-align: center;
+            padding: 10px;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>GlowSkincare</h1>
+    </header>
+
+    <!-- Navigasi -->
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="products.html">Produk</a>
+        <a href="face_detection.html">Pendeteksi Wajah</a> <!-- Menu baru untuk Pendeteksi Wajah -->
+        <a href="transactions.html">Transaksi</a>
+        <a href="simpan_data.html">Simpan Data</a>
+    </nav>
+
+    <!-- Carousel untuk Gambar Skincare -->
+    <div id="skincareCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="gambar/skintific.jpeg" class="d-block w-100" alt="Skitific">
+            </div>
+            <div class="carousel-item">
+                <img src="gambar/somethink.jpg" class="d-block w-100" alt="Somethink">
+            </div>
+            <div class="carousel-item">
+                <img src="gambar/diskon.jpeg" class="d-block w-100" alt="Diskon">
+            </div>
+            <div class="carousel-item">
+                <img src="gambar/somethink2.jpg" class="d-block w-100" alt="Somethink">
+            </div>
+            <div class="carousel-item">
+                <img src="gambar/haul.jpeg" class="d-block w-100" alt="Haul">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#skincareCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Sebelumnya</span>
+        </a>
+        <a class="carousel-control-next" href="#skincareCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Selanjutnya</span>
+        </a>
+    </div>
+
+    <!-- Container untuk Produk -->
+    <div class="container">
+        <h2>NEW FAVORITE BEAUTIES</h2>
+        <div class="product-container">
+            <div class="product">
+                <img src="gambar/skintific.jpeg" alt="Skintific">
+                <h3>Skintific 5X Ceramide Serum</h3>
+                <p>Serum dengan kandungan 5 jenis ceramide untuk memperbaiki dan menjaga skin barrier.</p>
+            </div>
+            <div class="product">
+                <img src="gambar/somethink.jpg" alt="Somethink">
+                <h3>Somethinc Niacinamide + Moisture Sabi Beet Serum</h3>
+                <p>Serum dengan Niacinamide untuk mencerahkan dan mengurangi noda hitam pada kulit.</p>
+            </div>
+            <div class="product">
+                <img src="gambar/somethink2.jpg" alt="Somethink">
+                <h3>Somethinc Hyaluronic B5 Serum</h3>
+                <p>Serum yang membantu menjaga kelembapan kulit dengan kandungan Hyaluronic Acid dan Vitamin B5.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Toko Skincare. Semua hak dilindungi.</p>
+    </footer>
+
+    <!-- Bootstrap JS dan dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

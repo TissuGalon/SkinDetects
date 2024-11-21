@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlowSkincare</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #ff9999;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        nav {
+            background-color: #ff9999;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav a {
+            padding: 14px 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            background-color: #ff6666; /* Ubah warna latar belakang saat hover */
+        }
+
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .product {
+            border: 1px solid #ddd;
+            padding: 20px;
+            background-color: #fff;
+            width: 250px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .product img {
+            width: 200px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .product h3 {
+            margin: 10px 0;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .product p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .product button {
+            padding: 8px 12px;
+            background-color: #ff9999;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .product button:hover {
+            background-color: #ff6666;
+        }
+
+        footer {
+            background-color: #ff9999;
+            text-align: center;
+            padding: 10px;
+            color: white;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Produk Kami</h1>
+    </header>
+
+    <!-- Navigasi -->
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="products.html">Produk</a>
+        <a href="face_detection.html">Pendeteksi Wajah</a> <!-- Menu baru untuk Pendeteksi Wajah -->
+        <a href="transactions.html">Transaksi</a>
+        <a href="simpan_data.html">Simpan Data</a>
+    </nav>
+
+    <!-- Container untuk Produk -->
+    <div class="container">
+        <h2>Koleksi Skincare Terbaik</h2>
+        
+        <div class="product-grid">
+            <!-- Produk 1 -->
+            <div class="product">
+                <img src="gambar/centella.jpeg" alt="Centella Ampoule">
+                <h3>Madagascar Centella Ampoule</h3>
+                <p>Ekstrak 100% Centella untuk kulit sensitif dan rentan berjerawat.</p>
+                <button onclick="pilihProduk('PRD001', 'Madagascar Centella Ampoule')">Beli</button>
+            </div>
+
+            <!-- Produk 2 -->
+            <div class="product">
+                <img src="gambar/MoistCreamEmina.jpg" alt="Moisturizer Cream">
+                <h3>Moisturizer Cream Emina</h3>
+                <p>Melembapkan kulit dan menjaga kelembutan sepanjang hari.</p>
+                <button onclick="pilihProduk('PRD002', 'Moisturizer Cream')">Beli</button>
+            </div>
+
+            <!-- Produk 3 -->
+            <div class="product">
+                <img src="gambar/ScarlettWhiteningSerum.jpg" alt="Brightening Serum">
+                <h3>Brightening Serum</h3>
+                <p>Membantu mencerahkan kulit dan mengurangi noda hitam.</p>
+                <button onclick="pilihProduk('PRD003', 'Brightening Serum')">Beli</button>
+            </div>
+
+            <!-- Produk 4 -->
+            <div class="product">
+                <img src="gambar/images (7).jpg" alt="Sunscreen SPF 50">
+                <h3>Sunscreen SPF 50</h3>
+                <p>Perlindungan tinggi terhadap sinar UV untuk kulit lebih sehat.</p>
+                <button onclick="pilihProduk('PRD004', 'Sunscreen SPF 50')">Beli</button>
+            </div>
+            
+            <!-- Produk 5 -->
+            <div class="product">
+                <img src="gambar/HanasuiCollagenSerum.jpg" alt="Hanasui Collagen Serum">
+                <h3>Hanasui Collagen Serum</h3>
+                <p>Vitamin C berfungsi untuk mencerahkan kulit dan menghilangkan noda hitam di wajah.</p>
+                <button onclick="pilihProduk('PRD005', 'Hanasui Collagen Serum')">Beli</button>
+            </div>
+
+            <!-- Produk 6 -->
+            <div class="product">
+                <img src="gambar/Garnier_Charcoal.jpg" alt="Garnier Charcoal">
+                <h3>Garnier Charcoal</h3>
+                <p>Garnier Charcoal berfungsi untuk membersihkan komedo, menyerap minyak berlebih, dan detoksifikasi kulit. Cocok untuk kulit berminyak dan berkomedo.</p>
+                <button onclick="pilihProduk('PRD005', 'Hanasui Collagen Serum')">Beli</button>
+            </div>
+
+            <!-- Produk 7 -->
+            <div class="product">
+                <img src="gambar/The Body Shop Tea Tree.jpg" alt="The Body Shop Tea Tree">
+                <h3>The Body Shop Tea Tree</h3>
+                <p>Diformulasikan untuk mengatasi jerawat. Produk ini membantu mengurangi kemerahan dan peradangan pada kulit, serta mengontrol minyak berlebih, sehingga cocok untuk kulit berjerawat.</p>
+                <button onclick="pilihProduk('PRD005', 'Hanasui Collagen Serum')">Beli</button>
+            </div>
+
+            <!-- Produk 8 -->
+            <div class="product">
+                <img src="gambar/L’Oreal Paris Pure Clay.jpg" alt="L’Oreal Paris Pure Clay">
+                <h3>L’Oreal Paris Pure Clay</h3>
+                <p>Mengatasi komedo, membersihkan pori-pori secara mendalam, dan mengurangi minyak berlebih di wajah.</p>
+                <button onclick="pilihProduk('PRD005', 'Hanasui Collagen Serum')">Beli</button>
+            </div>
+    
+            <!-- Produk 9 -->
+            <div class="product">
+                <img src="gambar/Neutrogena Oil-Free.jpg" alt="Neutrogena Oil-Free">
+                <h3>Neutrogena Oil-Free</h3>
+                <p>membantu mengontrol minyak berlebih dan membersihkan pori-pori tanpa membuat kulit kering atau menyumbat pori-pori.</p>
+                <button onclick="pilihProduk('PRD005', 'Hanasui Collagen Serum')">Beli</button>
+            </div>
+        </div>
+        </div>
+
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Toko Skincare. Semua hak dilindungi.</p>
+    </footer>
+
+    <script>
+        function pilihProduk(kodeProduk, namaProduk) {
+            // Arahkan ke halaman pembelian dengan parameter produk yang dipilih
+            window.location.href = `pembelian.html?kode=${kodeProduk}&nama=${encodeURIComponent(namaProduk)}`;
+        }
+    </script>
+</body>
+</html>

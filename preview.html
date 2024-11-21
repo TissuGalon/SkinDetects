@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlowSkincare - Form Pembelian</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f9; color: #333; }
+        header { background-color: #ff9999; padding: 20px; text-align: center; color: white; }
+        nav { background-color: #ff9999; display: flex; justify-content: center; position: relative; font-family: Arial, sans-serif; }
+        nav a { padding: 14px 20px; color: white; text-decoration: none; font-weight: bold; font-family: Arial, sans-serif; }
+        nav a:hover, .dropdown:hover .dropbtn { background-color: #ff6666; }
+
+        /* CSS untuk dropdown */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            font-family: Arial, sans-serif;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ff6666;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-weight: normal;
+            font-family: Arial, sans-serif;
+        }
+
+        .dropdown-content a:hover { background-color: #010000; }
+
+        .dropdown:hover .dropdown-content { display: block; }
+
+        .container { padding: 20px; font-family: Arial, sans-serif; }
+        .form-group { margin-bottom: 15px; font-family: Arial, sans-serif; }
+        .form-group label { font-weight: bold; display: block; margin-bottom: 5px; }
+        .form-group input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        footer { background-color: #ff9999; text-align: center; padding: 10px; color: white; font-family: Arial, sans-serif; }
+        .tombol-container { text-align: center; margin-top: 20px; }
+        button { background-color: #ff6666; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-family: Arial, sans-serif; }
+        button:hover { background-color: #ff3333; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Form Pembelian</h1>
+    </header>
+
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="products.html">Produk</a>
+        <a href="face_detection.html">Pendeteksi Wajah</a>
+        <div class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Transaksi</a>
+            <div class="dropdown-content">
+                <a href="data_barang.html">Data Barang</a>
+                <a href="pembelian.html">Pembelian</a>
+                <a href="form_pembelian.html">Form Pembelian</a>
+            </div>
+        </div>
+        <a href="simpan_data.html">Simpan Data</a>
+    </nav>
+
+    <div class="container">
+        <h2>Form Pembelian</h2>
+        
+        <div class="form-group">
+            <label for="namaProduk">Nama Produk</label>
+            <input type="text" id="namaProduk" disabled>
+        </div>
+
+        <div class="form-group">
+            <label for="kodeProduk">Kode Produk</label>
+            <input type="text" id="kodeProduk" disabled>
+        </div>
+
+        <div class="form-group">
+            <label for="jumlah">Jumlah</label>
+            <input type="number" id="jumlah" min="1" value="1">
+        </div>
+
+        <div class="form-group">
+            <label for="harga">Harga (Rp)</label>
+            <input type="number" id="harga" min="0" disabled>
+        </div>
+
+        <div class="tombol-container">
+            <button id="btnBeli" disabled>Konfirmasi Pembelian</button>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2024 Toko Skincare. Semua hak dilindungi.</p>
+    </footer>
+
+    <script>
+        // Ambil data dari URL
+        const urlParams = new URLSearchParams(window.location.search);
+        document.getElementById('namaProduk').value = urlParams.get('productName') || '';
+        document.getElementById('kodeProduk').value = urlParams.get('productCode') || '';
+
+        // Data produk untuk harga
+        const productData = {
+            "PRD001": { name: "Madagascar Centella Ampoule", price: 150000 },
+            "PRD002": { name: "Moisturizer Cream", price: 200000 },
+            "PRD003": { name: "Brightening Serum", price: 250000 }
+        };
+
+        const kodeProduk = document.getElementById('kodeProduk').value;
+        if (kodeProduk) {
+            const product = productData[kodeProduk];
+            if (product) {
+                document.getElementById('harga').value = product.price;
+                document.getElementById('btnBeli').disabled = false; // Mengaktifkan tombol konfirmasi
+            }
+        }
+
+        let pembelianList = JSON.parse(localStorage.getItem('pembelianList')) || [];
+
+        document.getElementById('btnBeli').addEventListener('click', function() {
+            const jumlah = parseInt(document.getElementById('jumlah').value);
+            const harga = parseInt(document.getElementById('harga').value);
+            const total = jumlah * harga;
+
+            pembelianList.push({
+                kode: kodeProduk,
+                nama: document.getElementById('namaProduk').value,
+                jumlah: jumlah,
+                harga: harga,
+                total: total
+            });
+            localStorage.setItem('pembelianList', JSON.stringify(pembelianList));
+            alert(`Pembelian ${jumlah} ${document.getElementById('namaProduk').value} berhasil!`);
+            window.location.href = `preview.html?productName=${encodeURIComponent(document.getElementById('namaProduk').value)}&productCode=${encodeURIComponent(document.getElementById('kodeProduk').value)}`;
+        });
+    </script>
+</body>
+</html>

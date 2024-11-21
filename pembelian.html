@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlowSkincare - Pembelian</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #ff6666;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        /* Menu Navigasi */
+        nav {
+            background-color: #ff9999;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+            position: relative;
+        }
+
+        nav a {
+            padding: 14px 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            position: relative;
+        }
+
+        nav a:hover {
+            background-color: #ff6666;
+        }
+
+        /* Dropdown Styling */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ff9999;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            top: 100%; /* Posisi dropdown di bawah item */
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ff6666;
+        }
+
+        /* Container */
+        .container {
+            padding: 20px;
+            background-color: white;
+            margin: 20px auto;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Tabel Produk */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #ff9999;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #ff9999;
+            text-align: center;
+            padding: 10px;
+            color: white;
+        }
+
+        /* Scanner styling */
+        #scanner {
+            display: none;
+            margin: 20px 0;
+            text-align: center;
+        }
+        #video {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        /* Styling tombol Scan */
+        #scanButton {
+            background-color: #ff6666;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        #scanButton:hover {
+            background-color: #ff4d4d;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Pembelian</h1>
+    </header>
+
+    <!-- Navigasi -->
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="products.html">Produk</a>
+        <a href="face_detection.html">Pendeteksi Wajah</a>
+        <div class="dropdown">
+            <a href="#">Transaksi</a>
+            <div class="dropdown-content">
+                <a href="transactions.html">Data Barang</a>
+                <a href="pembelian.html">Pembelian</a>
+                <a href="preview.html">Form Pembelian</a>
+            </div>
+        </div>
+        <a href="simpan_data.html">Simpan Data</a>
+    </nav>
+
+    <!-- Container untuk Data Barang -->
+    <div class="container">
+        <h2>Pembelian Produk</h2>
+        
+        <table>
+            <tr>
+                <th>Scan</th>
+            </tr>
+            <tr>
+                <td><button onclick="startScanner('Madagascar Centella Ampoule', 'PRD001')">Scan Barcode</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="startScanner('Moisturizer Cream', 'PRD002')">Scan Barcode</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="startScanner('Brightening Serum', 'PRD003')">Scan Barcode</button></td>
+            </tr>
+        </table>
+        
+        <!-- Scanner container -->
+        <div id="scanner">
+            <video id="video" autoplay></video>
+            <p id="result">Arahkan kamera ke barcode</p>
+            <button id="scanButton" onclick="processScan()">Scan</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Toko Skincare. Semua hak dilindungi.</p>
+    </footer>
+
+    <!-- Script for Barcode Scanning -->
+    <script>
+        let scannerActive = false;
+        const video = document.getElementById('video');
+        const scanner = document.getElementById('scanner');
+        let currentProductName = '';
+        let currentProductCode = '';
+
+        function startScanner(productName, productCode) {
+            currentProductName = productName;
+            currentProductCode = productCode;
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+                    .then(function(stream) {
+                        video.srcObject = stream;
+                        scanner.style.display = "block";
+                        scannerActive = true;
+                    })
+                    .catch(function(err) {
+                        console.error("Error accessing camera: " + err);
+                    });
+            } else {
+                alert("Camera not supported on this device.");
+            }
+        }
+
+        function processScan() {
+            alert("Memulai proses pemindaian barcode untuk " + currentProductName);
+            // Simulasi pemindaian barcode berhasil
+            setTimeout(() => {
+                // Redirect ke form pembelian dengan parameter
+                window.location.href = `preview.html?productName=${encodeURIComponent(currentProductName)}&productCode=${encodeURIComponent(currentProductCode)}`;
+            }, 1000);
+        }
+    </script>
+
+</body>
+</html>

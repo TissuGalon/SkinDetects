@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Genius</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #ff6666;
+            font-size: 36px;
+        }
+        h2 {
+            color: #ff9999;
+            font-size: 28px;
+            margin-top: 10px;
+        }
+        .description {
+            color: #666;
+            font-size: 18px;
+            margin: 20px 0;
+        }
+        .video-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+        video {
+            width: 100%;
+            max-width: 800px; /* Perbesar ukuran video */
+            border-radius: 8px;
+            display: block; /* Pastikan video ditampilkan sebagai block element */
+        }
+        .product-image {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #ff6666;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #ff4444;
+        }
+        .extra-description {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Analisa Kulit yang Akurat dengan Teknologi AI</h2>
+    <p class="description">
+        Skin Genius adalah alat diagnosa kulit berbasis teknologi AI yang menganalisa kulitmu dan memberikan rekomendasi perawatan sesuai dengan jenis dan masalah kulitmu.
+    </p>
+
+    <div class="video-container">
+        <video autoplay muted loop> <!-- Menjalankan otomatis dan menyembunyikan kontrol -->
+            <source src="https://www.loreal-paris.co.id/-/media/project/loreal/brand-sites/oap/apac/id/services-hub/video-skin-genius-dsktp-v6.mp4?rev=8adf06ba42e7454a94fb481484be234c" type="video/mp4">
+            Browser Anda tidak mendukung elemen video.
+        </video>
+    </div>
+
+    <button onclick="startDetection()">Pindai Wajah</button>
+
+    <div class="extra-description">
+        <p>Glowskincare Genius adalah aplikasi kecantikan yang menggunakan sistem penilaian atribut kulit berbasis Kecerdasan Buatan untuk memberikan diagnosis kulit yang detail dan panduan perawatan kulit yang dipersonalisasi. Alat analisis kulit ini cepat, gratis, dan rahasia, dikembangkan bersama dermatolog dengan pemahaman bahwa setiap kulit berbeda, maka rekomendasi perawatan kulit juga harus disesuaikan.</p>
+    </div>
+
+    <script>
+        function startDetection() {
+            // Mengarahkan pengguna ke halaman pindai.html
+            window.location.href = 'pindai.html'; 
+        }
+    </script>
+
+</body>
+</html>

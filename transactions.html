@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlowSkincare</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #ff9999;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        /* Menu Navigasi */
+        nav {
+            background-color: #ff9999;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        nav a {
+            padding: 14px 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            background-color: #ff6666;
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ff6666;
+            min-width: 160px;
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ff4d4d;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Container */
+        .container {
+            padding: 20px;
+        }
+
+        /* Tabel Produk */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #ff9999;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Foto Produk */
+        .product-img {
+            width: 50px;
+            height: auto;
+        }
+        .barcode-img {
+            width: 80px;
+            height: auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #ff9999;
+            text-align: center;
+            padding: 10px;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Transaksi</h1>
+    </header>
+
+    <!-- Navigasi -->
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="products.html">Produk</a>
+        <a href="face_detection.html">Pendeteksi Wajah</a> <!-- Menu baru untuk Pendeteksi Wajah -->
+        <div class="dropdown">
+            <a href="#">Transaksi</a>
+            <div class="dropdown-content">
+                <a href="data_barang.html">Data Barang</a>
+                <a href="pembelian.html">Pembelian</a>
+                <a href="preview.html">Form Pembelian</a> <!-- Link ini mengarah ke preview.html -->
+            </div>
+        </div>
+        <a href="simpan_data.html">Simpan Data</a>
+    </nav>
+
+    <!-- Container untuk Data Barang -->
+    <div class="container">
+        <h2>Data Barang</h2>
+        
+        <table>
+            <tr>
+                <th>No</th>
+                <th>Kode Produk</th>
+                <th>Foto Produk</th>
+                <th>Nama Produk</th>
+                <th>Barcode</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>PRD001</td>
+                <td><img src="gambar/centella.jpeg" alt="Produk" class="product-img"></td>
+                <td>Madagascar Centella Ampoule</td>
+                <td><img src="gambar/moisturaizer skintific.jpg.png" alt="Barcode Produk" class="barcode-img"></td>
+            </tr>
+            <tr>
+                <td>2</td> 
+                <td>PRD002</td>
+                <td><img src="gambar/MoistCreamEmina.jpg" alt="Produk" class="product-img"></td>
+                <td>Moisturizer Cream</td>
+                <td><img src="gambar/ss wardah 50 spf .jpg.png" alt="Barcode Produk" class="barcode-img"></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>PRD003</td>
+                <td><img src="gambar/ScarlettWhiteningSerum.jpg" alt="Produk" class="product-img"></td>
+                <td>Brightening Serum</td>
+                <td><img src="gambar/skintific.jpg.png" alt="Barcode Produk" class="barcode-img"></td>
+            </tr>
+            <!-- Tambahkan baris produk lainnya sesuai kebutuhan -->
+        </table>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Toko Skincare. Semua hak dilindungi.</p>
+    </footer>
+
+</body>
+</html>

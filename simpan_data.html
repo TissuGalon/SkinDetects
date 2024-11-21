@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlowSkincare - Simpan Data</title>
+    <style>
+        /* Basic styling */
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f9; color: #333; }
+        header { background-color: #ff9999; padding: 20px; text-align: center; color: white; }
+        nav { background-color: #ff9999; display: flex; justify-content: center; }
+        nav a { padding: 14px 20px; color: white; text-decoration: none; font-weight: bold; }
+        nav a:hover { background-color: #ff6666; }
+        nav a.active { background-color: #ff6666; }
+        .container { padding: 20px; text-align: center; }
+        h2 { font-size: 1.8em; color: #333; margin-bottom: 20px; }
+        table { width: 80%; margin: 0 auto; border-collapse: collapse; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+        th, td { padding: 12px; text-align: center; border: 1px solid #ddd; background-color: #fff; }
+        th { background-color: #f3f3f3; font-weight: bold; color: #333; }
+        button { background: none; border: none; color: #ff6666; cursor: pointer; font-size: 18px; }
+        button:hover { color: #ff3333; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Simpan Data</h1>
+    </header>
+
+    <!-- Navigasi -->
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="products.html">Produk</a>
+        <a href="face_detection.html">Pendeteksi Wajah</a> <!-- Menu baru untuk Pendeteksi Wajah -->
+        <a href="transactions.html">Transaksi</a>
+        <a href="simpan_data.html" class="active">Simpan Data</a>
+    </nav>
+
+    <!-- Container untuk Tabel Data Transaksi -->
+    <div class="container">
+        <h2>Data Transaksi</h2>
+        <table id="tabelKonfirmasi">
+            <thead>
+                <tr>
+                    <th>Kode Produk</th>
+                    <th>Nama Produk</th>
+                    <th>Jumlah</th>
+                    <th>Harga (Rp)</th>
+                    <th>Total Harga (Rp)</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script>
+        let pembelianList = JSON.parse(localStorage.getItem('pembelianList')) || [];
+        const tabelKonfirmasi = document.getElementById('tabelKonfirmasi').getElementsByTagName('tbody')[0];
+
+        function updateTabelKonfirmasi() {
+            tabelKonfirmasi.innerHTML = '';
+            pembelianList.forEach((item, index) => {
+                const row = tabelKonfirmasi.insertRow();
+                row.insertCell(0).innerText = item.kode;
+                row.insertCell(1).innerText = item.nama;
+                row.insertCell(2).innerText = item.jumlah;
+                row.insertCell(3).innerText = item.harga;
+                row.insertCell(4).innerText = item.total;
+
+                const aksiCell = row.insertCell(5);
+                const btnHapus = document.createElement('button');
+                btnHapus.innerHTML = 'Hapus';
+                btnHapus.onclick = () => hapusPembelian(index);
+                aksiCell.appendChild(btnHapus);
+            });
+        }
+
+        function hapusPembelian(index) {
+            pembelianList.splice(index, 1);
+            localStorage.setItem('pembelianList', JSON.stringify(pembelianList));
+            updateTabelKonfirmasi();
+        }
+
+        updateTabelKonfirmasi();
+    </script>
+</body>
+</html>

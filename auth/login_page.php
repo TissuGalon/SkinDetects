@@ -33,17 +33,17 @@
                     </h3>
 
                     <div class="p-3">
-                        <form class="form-horizontal m-t-20" action="login.php">
+                        <form class="form-horizontal m-t-20" action="login.php" method="POST">
 
                             <div class="form-group row">
                                 <div class="col-12">
-                                    <input class="form-control" type="text" required="" placeholder="Username">
+                                    <input class="form-control" type="text" name="id" required="" placeholder="Username" required>
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <div class="col-12">
-                                    <input class="form-control" type="password" required="" placeholder="Password">
+                                    <input class="form-control" type="password" name="password" required="" placeholder="Password" required>
                                 </div>
                             </div>
 

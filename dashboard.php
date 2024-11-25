@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -29,6 +33,7 @@
         <?php include 'navbar.php'; ?>
         <!-- End Navigation Bar-->
 
+        
 
         <div class="wrapper">
             <div class="container-fluid">
@@ -66,6 +71,7 @@
                 <div class="logo d-flex justify-content-center">
                     <h1>NEW FAVORITE BEAUTIES</h1>
                 </div>
+
 
                 <div class="row">
                     <div class="col-4">

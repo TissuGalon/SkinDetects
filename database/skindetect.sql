@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2024 at 05:37 PM
+-- Generation Time: Nov 25, 2024 at 06:17 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -31,6 +31,7 @@ CREATE TABLE `product` (
   `product_id` int(11) NOT NULL,
   `product_name` varchar(100) NOT NULL,
   `description` varchar(255) NOT NULL,
+  `harga` int(15) NOT NULL DEFAULT 0,
   `image` varchar(255) NOT NULL,
   `product_code` varchar(25) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -42,20 +43,20 @@ CREATE TABLE `product` (
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`product_id`, `product_name`, `description`, `image`, `product_code`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(6, 'Night Cream JKL', 'Krim malam untuk perawatan kulit saat tidur', 'img_673f27e1c03953.01478872.jpeg', 'PRD-006', '2024-11-19 19:07:18', NULL, NULL),
-(7, 'Toner MNO', 'Toner untuk menyegarkan kulit setelah mencuci muka', 'toner_mno.jpg', 'PRD-007', '2024-11-19 19:07:18', NULL, NULL),
-(8, 'Face Mask PQR', 'Masker wajah dengan kandungan charcoal untuk detoksifikasi', 'face_mask_pqr.jpg', 'PRD-008', '2024-11-19 19:07:18', NULL, NULL),
-(9, 'Lip Balm STU', 'Lip balm dengan kandungan pelembap alami', 'lip_balm_stu.jpg', 'PRD-009', '2024-11-19 19:07:18', NULL, NULL),
-(10, 'Foundation VWX', 'Foundation cair dengan coverage tinggi', 'foundation_vwx.jpg', 'PRD-010', '2024-11-19 19:07:18', NULL, NULL),
-(11, 'Blush On YZ', 'Blush on dengan warna natural untuk riasan sehari-hari', 'blush_on_yz.jpg', 'PRD-011', '2024-11-19 19:07:18', NULL, NULL),
-(12, 'Eye Cream ABC', 'Krim mata untuk mengurangi lingkaran hitam', 'eye_cream_abc.jpg', 'PRD-012', '2024-11-19 19:07:18', NULL, NULL),
-(13, 'Body Lotion DEF', 'Lotion untuk melembapkan kulit tubuh sepanjang hari', 'body_lotion_def.jpg', 'PRD-013', '2024-11-19 19:07:18', NULL, NULL),
-(14, 'Hair Serum GHI', 'Serum rambut untuk mengatasi rambut rontok', 'hair_serum_ghi.jpg', 'PRD-014', '2024-11-19 19:07:18', NULL, NULL),
-(15, 'Makeup Remover JKL', 'Penghapus makeup yang lembut untuk kulit sensitif', 'makeup_remover_jkl.jpg', 'PRD-015', '2024-11-19 19:07:18', NULL, NULL),
-(16, 'Wardah', 'hehe', 'Wardah.png', 'PRD-16', '2024-11-21 07:52:13', NULL, NULL),
-(17, 'Emina', 'hehehehe', 'img_673ee78c8485b7.58561826.jpeg', 'PRD-17', '2024-11-21 07:55:56', NULL, NULL),
-(18, 'Anu', 'Mwehehhe', 'img_673f1d1aade0d2.81482570.jpeg', 'PRD-18', '2024-11-21 11:44:26', NULL, NULL);
+INSERT INTO `product` (`product_id`, `product_name`, `description`, `harga`, `image`, `product_code`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(6, 'Night Cream JKL', 'Krim malam untuk perawatan kulit saat tidur', 0, 'img_673f27e1c03953.01478872.jpeg', 'PRD-006', '2024-11-19 19:07:18', NULL, NULL),
+(7, 'Toner MNO', 'Toner untuk menyegarkan kulit setelah mencuci muka', 0, 'toner_mno.jpg', 'PRD-007', '2024-11-19 19:07:18', NULL, NULL),
+(8, 'Face Mask PQR', 'Masker wajah dengan kandungan charcoal untuk detoksifikasi', 0, 'face_mask_pqr.jpg', 'PRD-008', '2024-11-19 19:07:18', NULL, NULL),
+(9, 'Lip Balm STU', 'Lip balm dengan kandungan pelembap alami', 0, 'lip_balm_stu.jpg', 'PRD-009', '2024-11-19 19:07:18', NULL, NULL),
+(10, 'Foundation VWX', 'Foundation cair dengan coverage tinggi', 0, 'foundation_vwx.jpg', 'PRD-010', '2024-11-19 19:07:18', NULL, NULL),
+(11, 'Blush On YZ', 'Blush on dengan warna natural untuk riasan sehari-hari', 0, 'blush_on_yz.jpg', 'PRD-011', '2024-11-19 19:07:18', NULL, NULL),
+(12, 'Eye Cream ABC', 'Krim mata untuk mengurangi lingkaran hitam', 0, 'eye_cream_abc.jpg', 'PRD-012', '2024-11-19 19:07:18', NULL, NULL),
+(13, 'Body Lotion DEF', 'Lotion untuk melembapkan kulit tubuh sepanjang hari', 0, 'body_lotion_def.jpg', 'PRD-013', '2024-11-19 19:07:18', NULL, NULL),
+(14, 'Hair Serum GHI', 'Serum rambut untuk mengatasi rambut rontok', 0, 'hair_serum_ghi.jpg', 'PRD-014', '2024-11-19 19:07:18', NULL, NULL),
+(15, 'Makeup Remover JKL', 'Penghapus makeup yang lembut untuk kulit sensitif', 0, 'makeup_remover_jkl.jpg', 'PRD-015', '2024-11-19 19:07:18', NULL, NULL),
+(16, 'Wardah', 'hehe', 0, 'Wardah.png', 'PRD-16', '2024-11-21 07:52:13', NULL, NULL),
+(17, 'Emina', 'hehehehe', 0, 'img_673ee78c8485b7.58561826.jpeg', 'PRD-17', '2024-11-21 07:55:56', NULL, NULL),
+(18, 'Anu', 'Mwehehhe', 0, 'img_673f1d1aade0d2.81482570.jpeg', 'PRD-18', '2024-11-21 11:44:26', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -93,6 +94,13 @@ CREATE TABLE `transaction_item` (
   `qty` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `transaction_item`
+--
+
+INSERT INTO `transaction_item` (`item_id`, `transaction_id`, `product_id`, `qty`) VALUES
+(4, 1, 16, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -115,9 +123,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `fullname`, `photo_profile`, `role`, `created_at`, `deleted_at`) VALUES
-(1, 'admin', '0192023a7bbd73250516f069df18b500', 'Admin System', NULL, 1, '2024-11-19 18:58:47', NULL),
+(1, 'admin', '$2y$10$e1T8I4y5v9Mk9BivLcGW/.C9tN5Tk/vjgPKKvp1e9rdg5HFCCWmAW', 'Admin System', NULL, 1, '2024-11-19 18:58:47', NULL),
 (2, 'user1', '6ad14ba9986e3615423dfca256d04e3f', 'John Doe', 'john.jpg', 2, '2024-11-19 18:58:47', NULL),
-(3, 'user2', '6ad14ba9986e3615423dfca256d04e3f', 'Jane Doe', 'jane.jpg', 2, '2024-11-19 18:58:47', NULL);
+(3, 'user2', '6ad14ba9986e3615423dfca256d04e3f', 'Jane Doe', 'jane.jpg', 2, '2024-11-19 18:58:47', NULL),
+(4, 'gg', '$2y$10$zEcn.oF95bJcTTBdFzRuI.KVcOO7tg2TNeuKLN3tdRuYSFBc72J4W', '', NULL, 2, '2024-11-25 02:06:21', NULL),
+(5, 'wew', '$2y$10$e1T8I4y5v9Mk9BivLcGW/.C9tN5Tk/vjgPKKvp1e9rdg5HFCCWmAW', '', NULL, 2, '2024-11-25 02:06:59', NULL);
 
 --
 -- Indexes for dumped tables
@@ -172,13 +182,13 @@ ALTER TABLE `transaction`
 -- AUTO_INCREMENT for table `transaction_item`
 --
 ALTER TABLE `transaction_item`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

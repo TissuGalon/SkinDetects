@@ -1,34 +1,16 @@
-<?php
-require_once 'controller/koneksi.php';
-?>
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <title>Glow Skincare</title>
-    <meta content="Admin Dashboard" name="description" />
-    <meta content="Mannatthemes" name="author" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Glow Skincare - OpenCV.js Acne Detection</title>
 
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
-
-    <link href="assets/plugins/morris/morris.css" rel="stylesheet">
-
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/icons.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/style.css" rel="stylesheet" type="text/css">
-
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
-
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <style>
         #scanner-container {
             width: 100%;
-            height: 300px;
+            height: 600px;
             position: relative;
             overflow: hidden;
             border: 1px solid #ddd;
@@ -60,124 +42,111 @@ require_once 'controller/koneksi.php';
             cursor: not-allowed;
         }
     </style>
-
 </head>
 
 <body>
-
-    <!-- Loader -->
-    <div id="preloader">
-        <div id="status">
-            <div class="spinner"></div>
+    <div class="container">
+        <div id="scanner-container">
+            <video id="video" autoplay></video>
+            <canvas id="canvas-output" style="display:none;"></canvas>
+        </div>
+        <button id="start-button" onclick="startDetection()">Start Deteksi Jerawat</button>
+        <div id="results">
+            <h4>Hasil Deteksi:</h4>
+            <p id="detection-result">Menunggu deteksi...</p>
         </div>
     </div>
 
-    <!-- Navigation Bar-->
-    <?php include 'navbar.php'; ?>
-    <!-- End Navigation Bar-->
-
-    <div class="wrapper">
-        <div class="container-fluid">
-
-            <br>
-            <div class="logo d-flex justify-content-center">
-                <div class="text-center">
-                    <h1>Face Detect - Real-Time Acne Detection</h1>
-                </div>
-            </div>
-
-            <br>
-
-            <div class="container">
-                <!-- Webcam Feed -->
-                <div id="scanner-container">
-                    <video id="video" width="100%" height="auto" autoplay></video>
-                </div>
-
-                <br>
-                <!-- Start Button -->
-                <button id="start-button" onclick="startDetection()">Start Deteksi Jerawat</button>
-
-                <br>
-                <div id="results">
-                    <h4>Hasil Deteksi:</h4>
-                    <p id="detection-result">Menunggu deteksi...</p>
-                </div>
-            </div>
-
-        </div> <!-- end container -->
-    </div>
-    <!-- end wrapper -->
-
-    <!-- Footer -->
-    <?php include 'footer.php'; ?>
-    <!-- End Footer -->
-
-    <!-- jQuery  -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/modernizr.min.js"></script>
-    <script src="assets/js/waves.js"></script>
-    <script src="assets/js/jquery.slimscroll.js"></script>
-    <script src="assets/js/jquery.nicescroll.js"></script>
-    <script src="assets/js/jquery.scrollTo.min.js"></script>
-
-    <script src="assets/plugins/skycons/skycons.min.js"></script>
-    <script src="assets/plugins/raphael/raphael-min.js"></script>
-    <script src="assets/plugins/morris/morris.min.js"></script>
-
-    <script src="assets/pages/dashborad.js"></script>
-
-    <!-- App js -->
-    <script src="assets/js/app.js"></script>
+    <!-- OpenCV.js -->
+    <script async src="https://docs.opencv.org/4.x/opencv.js"></script>
 
     <script>
-        let model;
         let videoStream;
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas-output');
+        const ctx = canvas.getContext('2d');
 
-        // Memuat model deteksi objek COCO-SSD
-        async function loadModel() {
-            model = await cocoSsd.load();
-            console.log("Model loaded successfully!");
-        }
+        cv['onRuntimeInitialized'] = () => {
+            console.log("OpenCV.js is ready!");
+        };
 
-        // Fungsi untuk memulai deteksi jerawat setelah tombol Start diklik
         async function startDetection() {
-            // Nonaktifkan tombol untuk mencegah klik ganda
             document.getElementById("start-button").disabled = true;
 
-            // Mengakses webcam dan menampilkan video
-            const video = document.getElementById("video");
-            videoStream = await navigator.mediaDevices.getUserMedia({
-                video: true
-            });
-            video.srcObject = videoStream;
-
-            // Setelah video dimulai, deteksi objek setiap frame
-            detectVideo(video);
+            try {
+                videoStream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = videoStream;
+                video.onloadeddata = processVideo;
+            } catch (error) {
+                console.error("Error accessing webcam:", error);
+                document.getElementById("detection-result").innerText = "Gagal mengakses webcam.";
+            }
         }
 
-        // Fungsi untuk mendeteksi jerawat pada video secara real-time
-        async function detectVideo(videoElement) {
-            const predictions = await model.detect(videoElement);
+        function processVideo() {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-            // Menampilkan hasil deteksi
-            if (predictions.length > 0) {
-                document.getElementById("detection-result").innerText = "Jerawat Terdeteksi!";
-                // Bisa menambahkan logika untuk deteksi jerawat berdasarkan prediksi
-            } else {
-                document.getElementById("detection-result").innerText = "Tidak ada jerawat yang terdeteksi.";
+            // Pastikan gambar dari canvas valid
+            let src = cv.imread(canvas);
+            if (src.empty()) {
+                console.error("Failed to read image from canvas.");
+                return;
             }
 
-            // Melakukan deteksi lagi pada frame berikutnya
-            requestAnimationFrame(() => detectVideo(videoElement));
+            let dst = new cv.Mat();
+
+            // Membuat matriks untuk rentang warna
+            let low = new cv.Mat(src.rows, src.cols, src.type(), [0, 50, 80, 0]);  // Rentang warna bawah
+            let high = new cv.Mat(src.rows, src.cols, src.type(), [35, 255, 255, 0]); // Rentang warna atas
+
+            try {
+                // Konversi ke ruang warna HSV
+                cv.cvtColor(src, src, cv.COLOR_RGB2HSV);
+
+                // Deteksi warna
+                cv.inRange(src, low, high, dst); // Deteksi warna berdasarkan rentang low-high
+
+                let contours = new cv.MatVector();
+                let hierarchy = new cv.Mat();
+                cv.findContours(dst, contours, hierarchy, cv.RETR_CCOMP, cv.CHAIN_APPROX_SIMPLE);
+
+                if (contours.size() > 0) {
+                    document.getElementById("detection-result").innerText = "Jerawat Terdeteksi!";
+                    captureImage(); // Menangkap gambar saat jerawat terdeteksi
+                } else {
+                    document.getElementById("detection-result").innerText = "Tidak Ada Jerawat Terdeteksi.";
+                }
+
+                contours.delete();
+                hierarchy.delete();
+            } catch (error) {
+                console.error("Error in OpenCV processing:", error);
+            }
+
+            src.delete();
+            dst.delete();
+            low.delete();
+            high.delete();
+
+            requestAnimationFrame(processVideo); // Memproses frame berikutnya
         }
 
-        // Memuat model saat halaman dimuat
-        window.onload = loadModel;
-    </script>
+        function captureImage() {
+            // Menangkap gambar ketika jerawat terdeteksi
+            let capturedImage = canvas.toDataURL("image/png");
+            let imgWindow = window.open('', '_blank');
+            imgWindow.document.write('<img src="' + capturedImage + '" />');
+        }
 
+
+
+        function captureImage() {
+            const imageUrl = canvas.toDataURL("image/png");
+            window.location.href = `detection-result.html?image=${encodeURIComponent(imageUrl)}`;
+        }
+    </script>
 </body>
 
 </html>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2024 at 06:17 AM
+-- Generation Time: Dec 09, 2024 at 08:10 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,32 @@ SET time_zone = "+00:00";
 --
 -- Database: `skindetect`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pemesanan`
+--
+
+CREATE TABLE `pemesanan` (
+  `id_pemesanan` int(11) NOT NULL,
+  `nama_pesanan` varchar(50) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `id_product` int(11) NOT NULL,
+  `qty` int(5) NOT NULL,
+  `total_harga` int(5) NOT NULL,
+  `nama_pemesan` varchar(50) NOT NULL,
+  `alamat` varchar(80) NOT NULL,
+  `status` enum('dipesan','dikirim') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pemesanan`
+--
+
+INSERT INTO `pemesanan` (`id_pemesanan`, `nama_pesanan`, `user_id`, `id_product`, `qty`, `total_harga`, `nama_pemesan`, `alamat`, `status`) VALUES
+(3, 'Wardah', 1, 16, 4, 40000, 'gg', '43453', 'dipesan'),
+(4, 'Wardah', 1, 16, 5, 50000, 'gg', 'jghjghj', 'dipesan');
 
 -- --------------------------------------------------------
 
@@ -54,7 +80,7 @@ INSERT INTO `product` (`product_id`, `product_name`, `description`, `harga`, `im
 (13, 'Body Lotion DEF', 'Lotion untuk melembapkan kulit tubuh sepanjang hari', 0, 'body_lotion_def.jpg', 'PRD-013', '2024-11-19 19:07:18', NULL, NULL),
 (14, 'Hair Serum GHI', 'Serum rambut untuk mengatasi rambut rontok', 0, 'hair_serum_ghi.jpg', 'PRD-014', '2024-11-19 19:07:18', NULL, NULL),
 (15, 'Makeup Remover JKL', 'Penghapus makeup yang lembut untuk kulit sensitif', 0, 'makeup_remover_jkl.jpg', 'PRD-015', '2024-11-19 19:07:18', NULL, NULL),
-(16, 'Wardah', 'hehe', 0, 'Wardah.png', 'PRD-16', '2024-11-21 07:52:13', NULL, NULL),
+(16, 'Wardah', 'hehe', 10000, 'Wardah.png', 'PRD-16', '2024-11-21 07:52:13', NULL, NULL),
 (17, 'Emina', 'hehehehe', 0, 'img_673ee78c8485b7.58561826.jpeg', 'PRD-17', '2024-11-21 07:55:56', NULL, NULL),
 (18, 'Anu', 'Mwehehhe', 0, 'img_673f1d1aade0d2.81482570.jpeg', 'PRD-18', '2024-11-21 11:44:26', NULL, NULL);
 
@@ -127,11 +153,18 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `fullname`, `photo_profi
 (2, 'user1', '6ad14ba9986e3615423dfca256d04e3f', 'John Doe', 'john.jpg', 2, '2024-11-19 18:58:47', NULL),
 (3, 'user2', '6ad14ba9986e3615423dfca256d04e3f', 'Jane Doe', 'jane.jpg', 2, '2024-11-19 18:58:47', NULL),
 (4, 'gg', '$2y$10$zEcn.oF95bJcTTBdFzRuI.KVcOO7tg2TNeuKLN3tdRuYSFBc72J4W', '', NULL, 2, '2024-11-25 02:06:21', NULL),
-(5, 'wew', '$2y$10$e1T8I4y5v9Mk9BivLcGW/.C9tN5Tk/vjgPKKvp1e9rdg5HFCCWmAW', '', NULL, 2, '2024-11-25 02:06:59', NULL);
+(5, 'wew', '$2y$10$e1T8I4y5v9Mk9BivLcGW/.C9tN5Tk/vjgPKKvp1e9rdg5HFCCWmAW', '', NULL, 2, '2024-11-25 02:06:59', NULL),
+(6, 'yy', '$2y$10$Ff3mjQQLYG07YPv3s6tlCeRL6fuULfhZzchWzXamrFAwvquAMz0We', '', NULL, 2, '2024-12-09 05:57:25', NULL);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `pemesanan`
+--
+ALTER TABLE `pemesanan`
+  ADD PRIMARY KEY (`id_pemesanan`);
 
 --
 -- Indexes for table `product`
@@ -167,6 +200,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `pemesanan`
+--
+ALTER TABLE `pemesanan`
+  MODIFY `id_pemesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
@@ -188,7 +227,7 @@ ALTER TABLE `transaction_item`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables

@@ -211,7 +211,12 @@ require_once 'controller/koneksi.php';
                             <p class="card-text">
                                 <?php echo $row['description']; ?>.
                             </p>
-                            <a href="#" class="btn btn-primary waves-effect waves-light">Beli</a>
+                            <?php if (isset($_SESSION['LoginInfo'])) { ?>
+                            <a href="pemesanan.php?product_id=<?php echo $row['product_id']; ?>"
+                                class="btn btn-primary waves-effect waves-light">Beli</a>
+                            <?php }else{ ?>
+                            <a href="auth/login_page.php" class="btn btn-primary waves-effect waves-light">Beli</a>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

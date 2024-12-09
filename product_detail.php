@@ -104,7 +104,7 @@ require_once 'controller/koneksi.php';
                         <p class="card-text">
                             <?php echo $row['description']; ?>.
                         </p>
-                        <a href="#" class="btn btn-primary waves-effect waves-light">Beli</a>
+                        <a href="pemesanan.php?product_id=<?php echo $row['product_id']; ?>" class="btn btn-primary waves-effect waves-light">Beli</a>
                     </div>
                 </div>
             </div>

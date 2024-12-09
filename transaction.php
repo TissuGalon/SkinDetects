@@ -43,64 +43,102 @@
             
             <?php if (isset($_SESSION['LoginInfo'])) { ?>
                 
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card m-b-30">
-                            <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="card m-b-30">
+                                                                <div class="card-body">
                                 
                                 
-                                <table class="table" id="myTable">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Tanggal Transaksi</th>
-                                            <th>Jumlah Produk</th>
-                                            <th>Total Harga</th>
-                                            <th>Produk</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>2024</td>
-                                            <td>5</td>
-                                            <td>120.000</td>
-                                            <td>
-                                                <ul>
-                                                    <li>
-                                                        <img src="media/blank_image.jpg" style="width:50px; height:50px;" alt="">
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                            <td><span class="badge badge-primary">Dipesan</span></td>
-                                            <td>
-                                                <div class="d-flex gap-2">
-                                                    
-                                                    <div class="mx-1"></div>
-                                                    <a href="#"
-                                                    onclick=""
-                                                    class="btn btn-sm btn-danger">
-                                                    <i class="mdi mdi-close"></i> Batalkan
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>                                               
-                                </tbody>
-                            </table>
+                                                                   <?php
+                                                                   // Pastikan file koneksi ada
+                                                                   require_once 'controller/koneksi.php';
+
+                                                                   // Query untuk mengambil data dari tabel `pemesanan`
+                                                                   $sql = "SELECT * 
+        FROM pemesanan p 
+        JOIN product pr ON p.id_product = pr.product_id 
+        ";
+
+                                                                   $result = mysqli_query($conn, $sql);
+                                                                   ?>
+
+                                    <table class="table" id="myTable">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Jumlah Produk</th>
+                                                <th>Total Harga</th>
+                                                <th>Produk</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            if (mysqli_num_rows($result) > 0) {
+                                                $no = 1; // Untuk membuat penomoran urut
+                                                while ($row = mysqli_fetch_assoc($result)) {
+                                                    ?>
+                                                                                                                                <tr>
+                                                                                                                                    <th scope="row"><?php echo $no++; ?></th>                                                                                                            
+                                                                                                                                    <td><?php echo $row['qty']; ?></td>
+                                                                                                                                    <td>Rp <?php echo number_format($row['total_harga'], 0, ',', '.'); ?></td>
+                                                                                                                                    <td>
+                                                                                                                                        <ul>
+                                                                                                                                            <li>
+                                                                                                                                                <img 
+                                                                                                                                                    src="media/<?php echo $row['image']; ?>" 
+                                                                                                                                                    style="width:50px; height:50px;" 
+                                                                                                                                                    alt="Gambar Produk" 
+                                                                                                                                                    onerror="this.onerror=null; this.src='media/blank_image.jpg';"
+                                                                                                                                                >
+                                                                                                                                                <br><?php echo $row['product_name']; ?>
+                                                                                                                                            </li>
+                                                                                                                                        </ul>
+                                                                                                                                    </td>
+                                                                                                                                    <td>
+                                                                                                                                        <?php
+                                                                                                                                        if ($row['status'] == 'dipesan') {
+                                                                                                                                            echo '<span class="badge badge-primary">Dipesan</span>';
+                                                                                                                                        } elseif ($row['status'] == 'dikirim') {
+                                                                                                                                            echo '<span class="badge badge-success">Dikirim</span>';
+                                                                                                                                        }
+                                                                                                                                        ?>
+                                                                                                                                    </td>
+                                                                                                                                    <td>
+                                                                                                                                        <div class="d-flex gap-2">
+                                                                                                                                            <a href="controller/batalkan_pemesanan.php?id=<?php echo $row['id_pemesanan']; ?>" 
+                                                                                                                                               class="btn btn-sm btn-danger"
+                                                                                                                                               onclick="return confirm('Apakah Anda yakin ingin membatalkan pesanan ini?')">
+                                                                                                                                                <i class="mdi mdi-close"></i> Batalkan
+                                                                                                                                            </a>
+                                                                                                                                        </div>
+                                                                                                                                    </td>
+                                                                                                                                </tr> 
+                                                                                                                        <?php
+                                                }
+                                            } else {
+                                                ?>
+                                                                                        <tr>
+                                                                                            <td colspan="7" class="text-center">Belum ada data pemesanan</td>
+                                                                                        </tr>
+                                                                                <?php
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
+
                             
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
             
             <?php } else { ?>
                 
-                <div class="d-flex justify-content-center">
-                    <a href="auth/login_page.php" class="btn btn-primary btn-lg w-25 ">Login Untuk Melihat</a>
-                </div>
+                                                    <div class="d-flex justify-content-center">
+                                                        <a href="auth/login_page.php" class="btn btn-primary btn-lg w-25 ">Login Untuk Melihat</a>
+                                                    </div>
                 
                 <?php } ?>
                 

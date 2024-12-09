@@ -298,6 +298,7 @@ require '../vendor/autoload.php';
                                                         <th>#</th>
                                                         <th>Image</th>
                                                         <th>Product Name</th>
+                                                        <th>Harga</th>
                                                         <th>Description</th>
                                                         <th>Ditambahkan pada</th>
                                                         <th>Product Code</th>
@@ -312,59 +313,62 @@ require '../vendor/autoload.php';
                                                     while ($row = mysqli_fetch_array($query)) {
                                                         $product_code = $row['product_code'];
                                                         ?>
-                                                                                                                        <tr>
-                                                                                                                            <td>
-                                                                                                                                <?php echo $no++; ?>
-                                                                                                                            </td>
-                                                                                                                            <td>
-                                                                                                                                <img src="../media/<?php echo $row['image']; ?>"
-                                                                                                                                    class="rounded" alt="Product Image"
-                                                                                                                                    style="width: 80px; height: 80px; cursor:Pointer;"
-                                                                                                                                    onclick="viewImage('../media/<?php echo $row['image']; ?>')"
-                                                                                                                                    onerror="this.onerror=null; this.src='../media/blank_image.jpg';">
-                                                                                                                            </td>
-                                                                                                                            <td>
-                                                                                                                                <?php echo $row['product_name']; ?>
-                                                                                                                            </td>
-                                                                                                                            <td>
-                                                                                                                                <?php echo $row['description']; ?>
-                                                                                                                            </td>
-                                                                                                                            <td>
-                                                                                                                                <?php echo $row['created_at']; ?>
-                                                                                                                            </td>
-                                                                                                                            <td>
-                                                                                                                                <?php echo $product_code; ?>
-                                                                                                                            </td>
-                                                                                                                            <td>
-                                                        <img src="../controller/generate_barcode.php?code=<?php echo urlencode($product_code); ?>" 
-                                                             alt="Barcode">
-                                                        <div class="row mt-2">
-                                                            <div class="col-12">
-                                                                <a href="../controller/generate_barcode.php?code=<?php echo urlencode($product_code); ?>" 
-                                                                   download="barcode_<?php echo $product_code; ?>.png" 
-                                                                   class="btn btn-sm btn-primary w-100"> 
-                                                                   <i class="mdi mdi-download"></i> Simpan Barcode
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </td>
+                                                                                                                                    <tr>
+                                                                                                                                        <td>
+                                                                                                                                            <?php echo $no++; ?>
+                                                                                                                                        </td>
+                                                                                                                                        <td>
+                                                                                                                                            <img src="../media/<?php echo $row['image']; ?>"
+                                                                                                                                                class="rounded" alt="Product Image"
+                                                                                                                                                style="width: 80px; height: 80px; cursor:Pointer;"
+                                                                                                                                                onclick="viewImage('../media/<?php echo $row['image']; ?>')"
+                                                                                                                                                onerror="this.onerror=null; this.src='../media/blank_image.jpg';">
+                                                                                                                                        </td>
+                                                                                                                                        <td>
+                                                                                                                                            <?php echo $row['product_name']; ?>
+                                                                                                                                        </td>
+                                                                                                                                        <td>
+                                                                                                                                            Rp. <?php echo $row['harga']; ?>
+                                                                                                                                        </td>
+                                                                                                                                        <td>
+                                                                                                                                            <?php echo $row['description']; ?>
+                                                                                                                                        </td>
+                                                                                                                                        <td>
+                                                                                                                                            <?php echo $row['created_at']; ?>
+                                                                                                                                        </td>
+                                                                                                                                        <td>
+                                                                                                                                            <?php echo $product_code; ?>
+                                                                                                                                        </td>
+                                                                                                                                        <td>
+                                                                    <img src="../controller/generate_barcode.php?code=<?php echo urlencode($product_code); ?>" 
+                                                                         alt="Barcode">
+                                                                    <div class="row mt-2">
+                                                                        <div class="col-12">
+                                                                            <a href="../controller/generate_barcode.php?code=<?php echo urlencode($product_code); ?>" 
+                                                                               download="barcode_<?php echo $product_code; ?>.png" 
+                                                                               class="btn btn-sm btn-primary w-100"> 
+                                                                               <i class="mdi mdi-download"></i> Simpan Barcode
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
 
-                                                                                                                            <td>
-                                                                                                                                <div class="d-flex gap-2">
-                                                                                                                                    <a href="#"
-                                                                                                                                        onclick="editProduct('<?php echo $row['product_id']; ?>', '<?php echo $row['product_name']; ?>', '<?php echo $row['description']; ?>')"
-                                                                                                                                        class="btn btn-sm btn-warning">
-                                                                                                                                        <i class="mdi mdi-pencil"></i>
-                                                                                                                                    </a>
-                                                                                                                                    <div class="mx-1"></div>
-                                                                                                                                    <a href="#"
-                                                                                                                                        onclick="deleteProduct('<?php echo $row['product_id']; ?>')"
-                                                                                                                                        class="btn btn-sm btn-danger">
-                                                                                                                                        <i class="mdi mdi-delete"></i>
-                                                                                                                                    </a>
-                                                                                                                                </div>
-                                                                                                                            </td>
-                                                                                                                        </tr>
+                                                                                                                                        <td>
+                                                                                                                                            <div class="d-flex gap-2">
+                                                                                                                                                <a href="#"
+                                                                                                                                                    onclick="editProduct('<?php echo $row['product_id']; ?>', '<?php echo $row['product_name']; ?>', '<?php echo $row['description']; ?>')"
+                                                                                                                                                    class="btn btn-sm btn-warning">
+                                                                                                                                                    <i class="mdi mdi-pencil"></i>
+                                                                                                                                                </a>
+                                                                                                                                                <div class="mx-1"></div>
+                                                                                                                                                <a href="#"
+                                                                                                                                                    onclick="deleteProduct('<?php echo $row['product_id']; ?>')"
+                                                                                                                                                    class="btn btn-sm btn-danger">
+                                                                                                                                                    <i class="mdi mdi-delete"></i>
+                                                                                                                                                </a>
+                                                                                                                                            </div>
+                                                                                                                                        </td>
+                                                                                                                                    </tr>
                                                     <?php } ?>
                                                 </tbody>
 

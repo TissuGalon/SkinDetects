@@ -48,9 +48,9 @@
                         <?php
                         if ($isLogin) {
                             ?>
-                                            <a class="dropdown-item" href="auth/logout.php"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>                                
+                                                <a class="dropdown-item" href="auth/logout.php"><i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>                                
                             <?php } else { ?>
-                                                <a class="dropdown-item" href="auth/login_page.php"><i class="mdi mdi-login m-r-5 text-muted"></i> Login</a>
+                                                    <a class="dropdown-item" href="auth/login_page.php"><i class="mdi mdi-login m-r-5 text-muted"></i> Login</a>
                                 <?php }
                         ?>
                                 
@@ -91,9 +91,9 @@
                         <li class="has-submenu">
                             <a href="product.php"><i class="mdi mdi-basket"></i>Produk</a>
                         </li>
-                        <li class="has-submenu">
+                       <!--  <li class="has-submenu">
                             <a href="detect.php"><i class="mdi mdi-face-recognition"></i>Deteksi Wajah</a>
-                        </li>
+                        </li> -->
                         <li class="has-submenu">
                             <a href="transaction.php"><i class="mdi mdi-cart-outline"></i>Transaksi</a>
                         </li>                                            
